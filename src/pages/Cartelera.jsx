@@ -49,6 +49,9 @@ function Cartelera({ cambiarVista }) {
             <MovieCard
               title={pelicula.title}
               image={pelicula.image}
+              year={pelicula.year}
+              genre={pelicula.genre}
+              duration={pelicula.duration}
               // Mantenemos tu lógica intacta
               onVerDetalle={() => cambiarVista("detalle", pelicula)} 
             />
