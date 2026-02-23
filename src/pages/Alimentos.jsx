@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { alimentos } from '../data/alimentos';
 
 /**
- * Componente interno para cada tarjeta de comida.
- * Lo creamos aquí mismo para tener efectos de Hover sin crear archivos extra.
+ * Componente `FoodCard`
+ *
+ * Tarjeta interna usada por `Alimentos` para mostrar un producto.
+ * Props:
+ * - `item` (object): Objeto con campos `id`, `nombre`, `imagen`, `precio`, `categoria`.
  */
 const FoodCard = ({ item }) => {
   const [hover, setHover] = useState(false);
@@ -108,6 +111,12 @@ const FoodCard = ({ item }) => {
   );
 };
 
+/**
+ * Página `Alimentos`
+ *
+ * Muestra las diferentes categorías de productos (Snacks, Bebidas, Dulces)
+ * usando datos importados desde `data/alimentos`.
+ */
 function Alimentos() {
   // Función auxiliar para renderizar una categoria
   const renderCategoria = (nombreCategoria) => {

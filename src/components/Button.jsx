@@ -1,3 +1,14 @@
+/**
+ * Componente `Button`
+ *
+ * Botón reutilizable con estilo inline pensado para acciones primarias.
+ * Props:
+ * - `text` (string): Texto que se muestra dentro del botón.
+ * - `onClick` (function): Manejador de clics.
+ *
+ * Uso:
+ * <Button text="Comprar" onClick={() => comprar()} />
+ */
 function Button({ text, onClick }) {
   return (
     <button 

@@ -1,6 +1,14 @@
 import MovieCard from '../components/MovieCard';
 import { peliculas } from '../data/peliculas';
 
+/**
+ * Página `Cartelera`
+ *
+ * Renderiza la lista de películas en cartelera usando `peliculas`.
+ * Props:
+ * - `cambiarVista` (function): Callback para cambiar la vista principal y
+ *   abrir la vista detalle pasando la película seleccionada.
+ */
 function Cartelera({ cambiarVista }) {
   return (
     <main

@@ -10,6 +10,12 @@ import Detalle from './pages/Detalle';
 import Alimentos from './pages/Alimentos';
 import Otros from './pages/Otros';
 
+/**
+ * Componente raíz `App`
+ *
+ * Gestiona la navegación interna entre vistas (home, cartelera, detalle, etc.)
+ * y mantiene el estado de la `peliculaSeleccionada` para pasarla a `Detalle`.
+ */
 function App() {
   const [vista, setVista] = useState('home');
   const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);

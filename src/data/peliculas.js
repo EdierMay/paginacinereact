@@ -29,7 +29,7 @@ export const peliculas = [
   {
     id: 4,
     title: "El niño con el pijama de rayas",
-    image: "https://play-lh.googleusercontent.com/_g3H6PmTFFdw2ElZiwI092GU1ObqLn6sQaKk8I1a-atcDKAF2ufYmw1qW_jZh4GRgoNFmrP3c2H93VI9e_M",
+    image: "https://play-lh.googleusercontent.com/rX1ilC2EGz6gZutXucNd_yAk0ebWbUZ0oKguk9BWk-Bf5muZIWKDbVwPgOxtR-zHCmAr",
     sinopsis: "Durante la Segunda Guerra Mundial, un niño alemán descubre la verdad sobre la guerra a través de una inesperada amistad con un niño judío. Una historia conmovedora sobre la inocencia en tiempos de oscuridad.",
     year: 2008,
     genre: "Drama / Bélico",

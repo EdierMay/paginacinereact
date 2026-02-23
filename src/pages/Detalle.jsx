@@ -1,6 +1,16 @@
 import { useState, useEffect } from 'react';
 import { peliculas } from '../data/peliculas';
 
+/**
+ * Página `Detalle`
+ *
+ * Muestra información completa de una película y un formulario
+ * para simular la compra de boletos.
+ * Props:
+ * - `cambiarVista` (function): Callback para regresar a otras vistas.
+ * - `peliculaSeleccionada` (object|null): Objeto película pasado desde
+ *   la lista (Home/Cartelera). Si es null, carga una película por defecto.
+ */
 function Detalle({ cambiarVista, peliculaSeleccionada }) {
   const [pelicula, setPelicula] = useState(null);
   

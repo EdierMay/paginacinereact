@@ -1,6 +1,19 @@
 import { useState } from 'react';
 import Button from "./Button";
 
+/**
+ * Componente `MovieCard`
+ *
+ * Tarjeta que muestra información básica de una película y un botón
+ * para ver su detalle.
+ * Props:
+ * - `title` (string): Título de la película.
+ * - `image` (string): URL de la imagen/portada.
+ * - `year` (string|number): Año de lanzamiento.
+ * - `genre` (string): Género de la película.
+ * - `duration` (string): Duración en formato texto.
+ * - `onVerDetalle` (function): Callback para abrir la vista detalle.
+ */
 function MovieCard({ title, image, year, genre, duration, onVerDetalle }) {
   const [hover, setHover] = useState(false);
   // ESTADO DINÁMICO: Lista de películas favoritas (Visual)

@@ -3,6 +3,13 @@ import MovieCard from '../components/MovieCard';
 // 1. Importamos la base de datos completa de tus películas
 import { peliculas } from '../data/peliculas'; 
 
+/**
+ * Página `Home`
+ *
+ * Muestra estrenos aleatorios y una sección de noticias (API demo).
+ * Props:
+ * - `cambiarVista` (function): Callback para abrir la vista detalle.
+ */
 function Home({ cambiarVista }) {
   // ESTADOS
   const [estrenosAleatorios, setEstrenosAleatorios] = useState([]);

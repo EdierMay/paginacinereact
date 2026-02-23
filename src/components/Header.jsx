@@ -79,6 +79,14 @@ function Header({ cambiarVista }) {
 
 // Sub-componente interno para manejar el Hover individualmente sin CSS externo
 // Esto mantiene tu código limpio y sin romper nada.
+/**
+ * Subcomponente `NavButton`
+ *
+ * Botón de navegación usado dentro del `Header`.
+ * Props:
+ * - `label` (string): Texto a mostrar.
+ * - `onClick` (function): Manejador de clic para cambiar la vista.
+ */
 function NavButton({ label, onClick }) {
   const [hover, setHover] = useState(false);
 

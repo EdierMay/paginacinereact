@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { otros } from '../data/otros';
 
 /**
- * Componente interno para manejar los efectos de Hover en cada tarjeta
- * sin complicar el código principal.
+ * Componente `ServiceCard`
+ *
+ * Tarjeta reutilizable para la página `Otros` que muestra un servicio/promoción.
+ * Props:
+ * - `item` (object): Objeto con `id`, `titulo`, `descripcion`, `imagen`.
  */
 const ServiceCard = ({ item }) => {
   const [hover, setHover] = useState(false);
@@ -96,6 +99,11 @@ const ServiceCard = ({ item }) => {
   );
 };
 
+/**
+ * Página `Otros`
+ *
+ * Muestra servicios y promociones disponibles.
+ */
 function Otros() {
   return (
     <main style={{ 
