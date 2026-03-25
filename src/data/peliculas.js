@@ -2,7 +2,7 @@ export const peliculas = [
   {
     id: 1,
     title: "Harry Potter y el Misterio del Príncipe",
-    image: "https://images.justwatch.com/poster/179690384/s718/harry-potter-y-el-misterio-del-principe.jpg",
+    image: "https://i.pinimg.com/736x/7d/3b/1f/7d3b1fa54de67ca93225a0190f65cc56.jpg",
     sinopsis: "En su sexto año en Hogwarts, Harry descubre el pasado de Voldemort con la ayuda de Dumbledore mientras un misterioso libro del 'Príncipe Mestizo' lo guía en secreto. La amenaza crece y la historia toma un giro oscuro y trágico.",
     year: 2009,
     genre: "Fantasía / Aventura",

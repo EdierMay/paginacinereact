@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom'; // 1. Importamos NavLink y useNavigate
 
 /**
  * Componente Header
- * * @description Renderiza el encabezado principal con estilos modernos y profesionales.
- * Mantiene la lógica original de navegación pero mejora la UX/UI.
  */
-function Header({ cambiarVista }) {
-  
-  // Lista de menús para generar los botones dinámicamente y mantener el código limpio
+function Header() {
+  const navigate = useNavigate(); // Hook para navegación programática (usado en el logo)
+
+  // Lista de menús actualizada con las rutas reales que definiste en App.jsx
   const menuItems = [
-    { label: "Inicio", key: "home" },
-    { label: "Cartelera", key: "cartelera" },
-    { label: "Alimentos", key: "alimentos" },
-    { label: "Otros", key: "otros" }
+    { label: "Inicio", path: "/" },
+    { label: "Cartelera", path: "/cartelera" },
+    { label: "Alimentos", path: "/alimentos" },
+    { label: "Otros", path: "/otros" },
+    { label: "Perfil", path: "/perfil" } // Ruta adicional solicitada en los criterios
   ];
 
   return (
     <header
       style={{
         width: "100%",
-        backgroundColor: '#E71235', // Rojo Cinemex
+        backgroundColor: '#E71235',
         color: 'white',
-        // Efecto moderno: Sombra suave y posición fija al hacer scroll
         boxShadow: "0 4px 12px rgba(0,0,0,0.15)", 
-        position: "sticky", 
+        position: "fixed", // Cambiado a fixed para que no "salte" al cambiar de ruta
         top: 0,
-        zIndex: 1000, // Asegura que siempre esté por encima de las películas
+        zIndex: 1000, 
         transition: "all 0.3s ease"
       }}
     >
@@ -34,22 +34,22 @@ function Header({ cambiarVista }) {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "12px 30px", // Padding más equilibrado
+          padding: "12px 30px",
           maxWidth: "1200px",
           margin: "0 auto",
           flexWrap: "wrap"
         }}
       >
-        {/* LOGOTIPO / TÍTULO */}
+        {/* LOGOTIPO: Al hacer clic, nos lleva al inicio */}
         <h1 
-          onClick={() => cambiarVista("home")}
+          onClick={() => navigate("/")}
           style={{ 
             margin: 0, 
             cursor: "pointer", 
-            fontFamily: "'Montserrat', sans-serif", // Fuente moderna
-            fontWeight: "900", // Extra negrita
+            fontFamily: "'Montserrat', sans-serif",
+            fontWeight: "900",
             fontSize: "1.8rem",
-            letterSpacing: "-1px", // Letras más pegaditas (estilo logo)
+            letterSpacing: "-1px",
             textTransform: "uppercase"
           }}
         >
@@ -60,16 +60,24 @@ function Header({ cambiarVista }) {
         <nav
           style={{
             display: "flex",
-            gap: "10px", // Espacio entre botones
+            gap: "10px",
             alignItems: "center"
           }}
         >
           {menuItems.map((item) => (
-            <NavButton 
-              key={item.key} 
-              label={item.label} 
-              onClick={() => cambiarVista(item.key)} 
-            />
+            /* 2. Usamos NavLink para la navegación, y destruturamos isActive para detectar la página activa */
+            <NavLink 
+              key={item.path} 
+              to={item.path} 
+              style={({ isActive }) => ({ 
+                textDecoration: 'none',
+                color: isActive ? '#E71235' : 'white',
+              })}
+            >
+              {({ isActive }) => (
+                <NavButton label={item.label} isActive={isActive} />
+              )}
+            </NavLink>
           ))}
         </nav>
       </div>
@@ -77,36 +85,29 @@ function Header({ cambiarVista }) {
   );
 }
 
-// Sub-componente interno para manejar el Hover individualmente sin CSS externo
-// Esto mantiene tu código limpio y sin romper nada.
 /**
  * Subcomponente `NavButton`
- *
- * Botón de navegación usado dentro del `Header`.
- * Props:
- * - `label` (string): Texto a mostrar.
- * - `onClick` (function): Manejador de clic para cambiar la vista.
  */
-function NavButton({ label, onClick }) {
+function NavButton({ label, isActive }) {
   const [hover, setHover] = useState(false);
 
   return (
     <span
-      onClick={onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
         cursor: "pointer",
         fontWeight: "600",
         fontSize: "0.9rem",
-        textTransform: "uppercase", // Estilo profesional
+        textTransform: "uppercase",
         padding: "8px 16px",
-        borderRadius: "20px", // Bordes redondeados modernos
-        transition: "all 0.3s ease", // Animación suave
-        // Lógica de estilos: Si hay hover, fondo blanco translúcido; si no, transparente
-        backgroundColor: hover ? "rgba(255, 255, 255, 0.2)" : "transparent",
-        color: "white",
-        letterSpacing: "0.5px"
+        borderRadius: "20px",
+        transition: "all 0.3s ease",
+        backgroundColor: isActive ? "rgba(231, 18, 53, 0.2)" : (hover ? "rgba(255, 255, 255, 0.2)" : "transparent"),
+        color: isActive ? "#E71235" : "white", // Color rojo si está activo
+        letterSpacing: "0.5px",
+        display: "inline-block", // Asegura que el padding se respete
+        borderBottom: isActive ? "2px solid #E71235" : "2px solid transparent" // Indicador visual
       }}
     >
       {label}

@@ -1,41 +1,38 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom'; // 1. Importamos hooks de navegación
 import { peliculas } from '../data/peliculas';
 
 /**
  * Página `Detalle`
- *
- * Muestra información completa de una película y un formulario
- * para simular la compra de boletos.
- * Props:
- * - `cambiarVista` (function): Callback para regresar a otras vistas.
- * - `peliculaSeleccionada` (object|null): Objeto película pasado desde
- *   la lista (Home/Cartelera). Si es null, carga una película por defecto.
  */
-function Detalle({ cambiarVista, peliculaSeleccionada }) {
-  const [pelicula, setPelicula] = useState(null);
+function Detalle() {
+  // 2. Inicializamos hooks
+  const navigate = useNavigate();
+  const { id } = useParams(); // Obtenemos el parámetro de la ruta dinámica
   
-  // ESTADOS DEL FORMULARIO CONTROLADO
+  const [pelicula, setPelicula] = useState(null);
   const [formData, setFormData] = useState({ nombre: '', boletos: 1 });
   const [compraExitosa, setCompraExitosa] = useState(false);
 
   useEffect(() => {
-    if (peliculaSeleccionada) {
-      const peliCompleta = peliculas.find(p => p.id === peliculaSeleccionada.id);
-      setPelicula(peliCompleta || peliculaSeleccionada);
+    if (id) {
+      // Buscar la película asumiendo que el ID en data puede ser numérico
+      const peliCompleta = peliculas.find(p => p.id.toString() === id);
+      setPelicula(peliCompleta || peliculas[0]); // Por defecto la primera si no encuentra
     } else {
+      // Si el usuario entra o algo falla, mostramos la primera
       setPelicula(peliculas[0]);
     }
-  }, [peliculaSeleccionada]);
+  }, [id]);
 
-  // MANEJADORES DE EVENTOS DEL FORMULARIO
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Evita que la página se recargue
-    setCompraExitosa(true); // Cambia el estado para mostrar la confirmación
+    e.preventDefault();
+    setCompraExitosa(true);
   };
 
   if (!pelicula) {
@@ -82,7 +79,7 @@ function Detalle({ cambiarVista, peliculaSeleccionada }) {
             </p>
           </div>
 
-          {/* FORMULARIO DE COMPRA DE BOLETOS */}
+          {/* FORMULARIO DE COMPRA */}
           <div style={{ backgroundColor: "#1f1f1f", padding: "30px", borderRadius: "12px", border: "1px solid #E71235", boxShadow: "0 4px 12px rgba(231,18,53,0.1)" }}>
             <h3 style={{ color: "white", marginTop: 0, fontSize: "1.3rem", marginBottom: "15px" }}>🎟️ Comprar Boletos</h3>
             
@@ -116,7 +113,6 @@ function Detalle({ cambiarVista, peliculaSeleccionada }) {
                 </button>
               </form>
             ) : (
-              // RESULTADO AL ENVIAR EL FORMULARIO
               <div style={{ textAlign: "center", padding: "20px 0" }}>
                 <h4 style={{ color: "#4CAF50", fontSize: "1.4rem", margin: "0 0 10px 0" }}>¡Compra Confirmada! ✅</h4>
                 <p style={{ color: "#ddd", margin: 0 }}>Gracias <strong>{formData.nombre}</strong>.</p>
@@ -125,8 +121,9 @@ function Detalle({ cambiarVista, peliculaSeleccionada }) {
             )}
           </div>
 
+          {/* 3. BOTÓN VOLVER ACTUALIZADO */}
           <button
-            onClick={() => cambiarVista("cartelera")}
+            onClick={() => navigate("/cartelera")} // Cambiamos cambiarVista por navigate
             style={{ alignSelf: "flex-start", marginTop: "10px", padding: "12px 30px", backgroundColor: "transparent", color: "#E71235", border: "2px solid #E71235", borderRadius: "50px", cursor: "pointer", fontWeight: "bold", fontSize: "1rem", textTransform: "uppercase", transition: "all 0.3s ease", display: "flex", alignItems: "center", gap: "8px" }}
             onMouseEnter={(e) => { e.target.style.backgroundColor = "#E71235"; e.target.style.color = "white"; }}
             onMouseLeave={(e) => { e.target.style.backgroundColor = "transparent"; e.target.style.color = "#E71235"; }}
